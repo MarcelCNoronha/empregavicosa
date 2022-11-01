@@ -26,7 +26,11 @@ class User extends Authenticatable
         'active'
     ];
 
-    protected $with = ['experiences', 'services'];
+    protected $with = [
+        'experiences', 
+        'services',
+        'publications'
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -56,5 +60,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Service::class)
                     ->using(ServiceUser::class);
+    }
+
+    public function publications()
+    {
+        return $this->hasMany(Publication::class);
     }
 }
