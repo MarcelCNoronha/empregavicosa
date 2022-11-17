@@ -26,6 +26,6 @@ class ServiceUserSeeder extends Seeder
                 'user_id'       => 1,
                 'service_id'    =>2
             ]
-            ]);
+        ]);
     }
 }

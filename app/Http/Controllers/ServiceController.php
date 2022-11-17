@@ -2,52 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Traits\CrudTrait;
 use App\Models\Service;
 use Illuminate\Support\Facades\Validator;
 
 class ServiceController extends Controller
 {
-    public function index()
-    {
-        return Service::all();
-    }
+    use Traits\CrudTrait;
 
-    public function show($id)
-    {
-        return Service::find($id);
-    }
+    public $model;
 
+    public function __construct(Service $service)
+    {
+        $this->model = $service;
+        $this->middleware('auth')->only([
+            'index',
+            'show',
+            'delete',
+            'store',
+            'update',
+            'searchName'
+        ]);
+    }
+    
     public function searchName($name)
     {
         return Service::where('name', $name)
                         ->orderBy('created_at', 'desc')
                         ->first();
-    }
-
-    public function delete($id)
-    {
-        $service = Service::find($id);
-        $service->delete();
-        return 'ok';
-    }
-
-    public function create(Request $request)
-    {        
-        $data       = $request->all();        
-        self::validation($data)->validated();        
-        $service    = Service::create($data);
-        return $service;
-    }
-
-    public function update(Request $request)
-    {
-        $id         = $request->id;
-        $data       = $request->all();
-        $service    = Service::find($id);
-        $service    = $service->update($data);
-        return $service;
-    }
+    }   
 
     private function validation(Array $data)
     {

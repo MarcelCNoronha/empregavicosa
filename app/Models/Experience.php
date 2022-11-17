@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Experience extends Model
 {
     use HasFactory;
-    protected $fillables = [
+    protected $fillable = [
         'id',
         'user_id',
         'name',

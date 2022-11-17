@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             ExperienceSeeder::class,
             ServiceSeeder::class,
             ServiceUserSeeder::class,
-            PublicationSeeder::class
+            PublicationSeeder::class,
+            PerfilSeeder::class
         ]);
     }
 }
