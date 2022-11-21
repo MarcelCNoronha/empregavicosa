@@ -1,9 +1,9 @@
 import './bootstrap';
 import { createApp } from 'vue';
-
-const app = createApp({});
-
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 import LoginComponent from './components/LoginComponent.vue';
-app.component('login-component', LoginComponent);
 
+const app = createApp(LoginComponent);
+app.use(VueAxios, axios);
 app.mount('#app');
