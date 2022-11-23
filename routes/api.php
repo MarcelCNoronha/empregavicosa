@@ -26,5 +26,6 @@ Route::resources(['publications' => PublicationController::class]);
 Route::post('/authenticate', [UserController::class, 'authenticate']);
 
 Route::get('/user/authenticate', [UserController::class, 'userAuthenticate']);
+Route::get('/user/is-user/{email}', [UserController::class, 'isUser']);
 
 Route::post('/service/user', [ServiceUserController::class, 'storeArray']);

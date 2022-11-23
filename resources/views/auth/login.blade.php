@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <LoginComponent></LoginComponent>
+    <div class="container">
+        <login />
+    </div>
+    
+    @vite('resources/js/pages/login.js')
 @endsection

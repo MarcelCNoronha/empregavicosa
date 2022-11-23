@@ -15,14 +15,14 @@ class ServiceController extends Controller
     public function __construct(Service $service)
     {
         $this->model = $service;
-        $this->middleware('auth')->only([
+        /*$this->middleware('auth')->only([
             'index',
             'show',
             'delete',
             'store',
             'update',
             'searchName'
-        ]);
+        ]);*/
     }
     
     public function searchName($name)

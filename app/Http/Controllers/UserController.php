@@ -66,4 +66,19 @@ class UserController extends Controller
             "data"      => $user
         ];
     }
+
+    public function isUser(String $email)
+    {
+        $user = User::where('email', $email)->first();
+
+        if(empty($user)) {
+            return [
+                'success' => false
+            ];
+        }
+
+        return [
+            'success' => true
+        ];
+    }
 }
