@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Traits;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 trait CrudTrait 
 {
@@ -38,6 +39,10 @@ trait CrudTrait
     {
         $data       = $request->all();
         $this->validation($data)->validate();
+
+        if(isset($data['password']))
+            $data['password'] = Hash::make($data['password']);
+
         $response   = $this->model::create($data);
         return $response;
     }

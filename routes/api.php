@@ -29,3 +29,5 @@ Route::get('/user/authenticate', [UserController::class, 'userAuthenticate']);
 Route::get('/user/is-user/{email}', [UserController::class, 'isUser']);
 
 Route::post('/service/user', [ServiceUserController::class, 'storeArray']);
+
+Route::post('/users', [UserController::class, 'store']);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -20,11 +21,11 @@ class UserController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = [
-            'email'     => $request->data['email'],
-            'password'  => $request->data['password']
+            'email'     => $request->email,
+            'password'  => $request->password
         ];
 
-        $user = User::where('email', $request->data['email'])->first();
+        $user = User::where('email', $request->email)->first();
 
         if(empty($user)) {
             return [
@@ -80,5 +81,24 @@ class UserController extends Controller
         return [
             'success' => true
         ];
+    }
+
+    private function validation(Array $data)
+    {
+        return Validator::make($data, [
+            'email'     => 'required',
+            'name'      => 'required',
+            'phone'     => 'required',
+            'active'    => 'required',
+            'age'       => 'required',
+            'password'  => 'required'
+        ],[
+            'email.required'        => 'O campo email é obrigatório',
+            'name.required'         => 'O campo name é obrigatório',
+            'phone.required'        => 'O campo phone é obrigatório',
+            'age.required'          => 'O campo age é obrigatório',
+            'password.required'     => 'O campo password é obrigatório',
+            'active.required'       => 'O campo active é obrigatório'
+        ]);
     }
 }
