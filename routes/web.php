@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,13 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
-Route::get('/user/create', function () {
-    return view('auth.create-user');
+Route::get('/forgot-password', function () {
+    return view('auth.forgot-password');
 });
+
+Route::get('/reset-password/{token}', function (Request $request) {
+    return view('auth.reset-password', [
+        'token' => $request->token,
+        'email' => $request->email
+    ]);
+})->name('password.reset');

@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\ExperienceController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
@@ -24,6 +26,8 @@ Route::resources(['perfils' => PerfilController::class]);
 Route::resources(['publications' => PublicationController::class]);
 
 Route::post('/authenticate', [UserController::class, 'authenticate']);
+Route::post('/forgot-password', [ForgotPasswordController::class, 'forgotPassword']);
+Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword']);
 
 Route::get('/user/authenticate', [UserController::class, 'userAuthenticate']);
 Route::get('/user/is-user/{email}', [UserController::class, 'isUser']);

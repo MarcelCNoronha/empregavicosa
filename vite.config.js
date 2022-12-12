@@ -13,7 +13,9 @@ export default defineConfig({
             input: [
                 'resources/css/app.css', 
                 'resources/js/app.js',
-                'resources/js/pages/login.js'
+                'resources/js/pages/login.js',
+                'resources/js/pages/forgot-password.js',
+                'resources/js/pages/reset-password.js'
             ],
             refresh: true,
         }),

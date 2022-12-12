@@ -2,6 +2,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
+
+                <div 
+                    v-if="error" 
+                    class="alert alert-danger mt-5" 
+                    role="alert"
+                >
+                    {{message}}
+                </div>
     
                 <div class="row mt-5 text-center">
                     <div class="col-12">
@@ -39,10 +47,16 @@
                                 :disabled="filledEmail"
                             >
                             <div 
-                                v-if="submitted && v$.form.email.$invalid"
+                                v-if="submitted && v$.form.email.required.$invalid"
                                 class="invalid-feedback"
                             >
                                 O campo email é obrigatório
+                            </div>
+                            <div 
+                                v-if="(submitted && v$.form.email.email.$invalid)"
+                                class="invalid-feedback"
+                            >
+                                O campo email deve ser do tipo email
                             </div>
                         </div>
                         <div v-if="filledEmail && isUser" class="col-12 mt-3">
@@ -63,6 +77,9 @@
                             >
                                 O campo senha é obrigatório
                             </div>
+                            <a href="/forgot-password">
+                                Recuperar Senha
+                            </a>
                         </div>
                         <div v-if="filledEmail && !isUser">
                             <div class="col-12 mt-3">
@@ -189,7 +206,7 @@
 <script>
     import axios from 'axios';
     import { useVuelidate } from '@vuelidate/core';
-    import { required, requiredIf } from '@vuelidate/validators';
+    import { required, requiredIf, email } from '@vuelidate/validators';
     import Swal from 'sweetalert2';
     export default {
         setup: ()   => ({ v$: useVuelidate() }),
@@ -206,13 +223,15 @@
                 },
                 isUser: '',
                 filledEmail: false,
-                submitted: false
+                submitted: false,
+                error: false,
+                message: ''
             }
         },
         validations() {
             return {
                 form: {
-                    email: {required},
+                    email: {required, email},
                     name: {
                         required: requiredIf(function () {
                             return this.filledEmail && !this.isUser
@@ -291,10 +310,14 @@
                     url: '/api/authenticate',
                     data: this.form
                 }).then((response) => {
-                    if(response.data) {
-                        window.location.href = '/';
-                        Swal.close();
-                    }
+                    if(response.data.success) {
+                        window.location.href = '/'; 
+                        this.error = false;   
+                        return;                  
+                    } 
+                    this.error = true;
+                    this.message = response.data.message;
+                    Swal.close();
                 });
             },
             getIsUser() {
