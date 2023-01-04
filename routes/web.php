@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Publication;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,8 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/welcome/{userId}', function (Request $request) {
+    $user = User::find($request->userId);
+    return view('welcome', [
+        'user' => $user
+    ]);
+});
+
+Route::get('/welcome-details/{publicationId}', function (Request $request) {
+    $publication = Publication::find($request->publicationId);
+    return view('welcome-details', [
+        'publication' => $publication
+    ]);
 });
 
 Route::get('/login', function () {

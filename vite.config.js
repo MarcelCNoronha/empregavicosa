@@ -15,7 +15,9 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/pages/login.js',
                 'resources/js/pages/forgot-password.js',
-                'resources/js/pages/reset-password.js'
+                'resources/js/pages/reset-password.js',
+                'resources/js/pages/welcome.js',
+                'resources/js/pages/welcome-details.js'
             ],
             refresh: true,
         }),

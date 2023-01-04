@@ -51,12 +51,13 @@
                                 class="invalid-feedback"
                             >
                                 O campo email é obrigatório
-                            </div>
+                            </div> 
+                            
                             <div 
-                                v-if="(submitted && v$.form.email.email.$invalid)"
+                                v-if="submitted && v$.form.email.email.$invalid"
                                 class="invalid-feedback"
                             >
-                                O campo email deve ser do tipo email
+                                O campo email deve ser um email válido
                             </div>
                         </div>
                         <div v-if="filledEmail && isUser" class="col-12 mt-3">
@@ -66,18 +67,18 @@
                             <input 
                                 type="password" 
                                 class="form-control"
-                                :class="{'is-invalid': submitted && v$.form.password.$invalid }"
+                                :class="{'is-invalid': submitted && v$.form.password.required.$invalid }"
                                 id="password" 
                                 placeholder="Digite à sua senha"
                                 v-model="form.password"
                             >
                             <div 
-                                v-if="submitted && v$.form.password.$invalid"
+                                v-if="submitted && v$.form.password.required.$invalid"
                                 class="invalid-feedback"
                             >
                                 O campo senha é obrigatório
                             </div>
-                            <a href="/forgot-password">
+                            <a :href="/forgot-password/">
                                 Recuperar Senha
                             </a>
                         </div>
@@ -115,10 +116,16 @@
                                     v-mask-phone.br
                                 >
                                 <div 
-                                    v-if="submitted && v$.form.phone.$invalid"
+                                    v-if="submitted && v$.form.phone.required.$invalid"
                                     class="invalid-feedback"
                                 >
                                     O campo telefone é obrigatório
+                                </div>
+                                <div 
+                                    v-if="submitted && v$.form.phone.minLength.$invalid"
+                                    class="invalid-feedback"
+                                >
+                                    O campo telefone está incompleto
                                 </div>
                             </div>
                             <div class="col-12 mt-3">
@@ -134,10 +141,16 @@
                                     v-model="form.age"
                                 >
                                 <div 
-                                    v-if="submitted && v$.form.age.$invalid"
+                                    v-if="submitted && v$.form.age.required.$invalid"
                                     class="invalid-feedback"
                                 >
                                     O campo idade é obrigatório
+                                </div>
+                                <div 
+                                    v-if="submitted && v$.form.age.minValue.$invalid"
+                                    class="invalid-feedback"
+                                >
+                                    O campo idade deve ser superior a 1 ano
                                 </div>
                             </div>
                             <div class="col-12 mt-3">
@@ -153,10 +166,16 @@
                                     v-model="form.password"
                                 >
                                 <div 
-                                    v-if="submitted && v$.form.password.$invalid"
+                                    v-if="submitted && v$.form.password.required.$invalid"
                                     class="invalid-feedback"
                                 >
                                     O campo senha é obrigatório
+                                </div>
+                                <div 
+                                    v-if="submitted && v$.form.password.minLength.$invalid"
+                                    class="invalid-feedback"
+                                >
+                                    O campo senha deve contêr 8 caracteres 
                                 </div>
                             </div>
                             <div class="col-12 mt-3">
@@ -172,22 +191,23 @@
                                     v-model="form.repeatPassword"
                                 >
                                 <div 
-                                    v-if="submitted && v$.form.repeatPassword.$invalid"
+                                    v-if="submitted && v$.form.repeatPassword.required.$invalid"
                                     class="invalid-feedback"
                                 >
                                     O campo senha é obrigatório
+                                </div>
+                                <div 
+                                    v-if="submitted && v$.form.repeatPassword.minLength.$invalid"
+                                    class="invalid-feedback"
+                                >
+                                    O campo senha deve contêr 8 caracters
                                 </div>
                             </div>
                         </div>
                     </div> 
                 </form>
 
-                <div class="text-danger">
-                    <span v-if="submitted && !igualPassword() && !isUser">
-                        As senhas não conferem
-                    </span>
-                </div>
-                <div class="row text-center mt-5">
+                <div class="row text-center mt-5 mb-5">
                     <div class="col-8 offset-2 d-grid">
                         <button 
                             type="button" 
@@ -206,7 +226,7 @@
 <script>
     import axios from 'axios';
     import { useVuelidate } from '@vuelidate/core';
-    import { required, requiredIf, email } from '@vuelidate/validators';
+    import { required, requiredIf, email, minValue, minLength, sameAs } from '@vuelidate/validators';
     import Swal from 'sweetalert2';
     export default {
         setup: ()   => ({ v$: useVuelidate() }),
@@ -240,22 +260,25 @@
                     phone: {
                         required: requiredIf(function () {
                             return this.filledEmail && !this.isUser
-                        })
+                        }),
+                        minLength: minLength(16)
                     },
                     age: {
                         required: requiredIf(function () {
                             return this.filledEmail && !this.isUser
-                        })
+                        }),
+                        minValue: minValue(1)                       
                     },
                     repeatPassword: {
                         required: requiredIf(function () {
                             return this.filledEmail && !this.isUser
-                        })
+                        }),
+                        minLength: minLength(8)
                     },
                     password: {
                         required: requiredIf(function () {
                             return this.filledEmail
-                        })
+                        }),
                     }
                 }
             }            
@@ -311,7 +334,7 @@
                     data: this.form
                 }).then((response) => {
                     if(response.data.success) {
-                        window.location.href = '/'; 
+                        window.location.href = '/welcome/' + response.data.message; 
                         this.error = false;   
                         return;                  
                     } 
@@ -329,9 +352,6 @@
                     this.filledEmail    = true;
                     this.submitted      = false;
                 });
-            },
-            igualPassword() {
-                return this.form.password == this.form.repeatPassword;
             }
         }
     }

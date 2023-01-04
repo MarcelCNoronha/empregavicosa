@@ -16,6 +16,10 @@ class Publication extends Model
         'active'
     ];
 
+    protected $with = [
+        'user'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

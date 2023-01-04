@@ -29,7 +29,6 @@ class User extends Authenticatable
     protected $with = [
         'experiences', 
         'services',
-        'publications',
         'perfils'
     ];
 
