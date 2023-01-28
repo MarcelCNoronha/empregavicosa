@@ -52,7 +52,7 @@
                     <div class="col-8 offset-2 d-grid">
                         <button 
                             type="button" 
-                            class="btn btn-primary text-white"
+                            class="btn btn:hover btn-text"
                             @click="post()"
                         >
                             Continuar

@@ -22,7 +22,7 @@
                 <div class="row mt-5 text-center">
                     <div class="col-12">
                         <img 
-                            src="image/logo_senac.png" 
+                            src="/image/logo.jpg" 
                             alt="logo"
                         >
                     </div>
@@ -35,7 +35,7 @@
                                 Redefinir Senha
                             </span> 
                             <br>
-                            Digite seu email para que possamos enviar as intruções para redefinir sua senha
+                            Informe seu e-mail para que possamos enviar as instruções para redefinir sua senha.
                         </p>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                     <div class="col-8 offset-2 d-grid">
                         <button 
                             type="button" 
-                            class="btn btn-primary text-white"
+                            class="btn btn:hover btn-text"
                             @click="post()"
                         >
                             Continuar

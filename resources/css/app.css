@@ -1,0 +1,42 @@
+.btn
+{
+    background-color: #CAEFFB;
+
+}
+
+.btn-text
+{
+    color: #2378FF;
+    
+    
+}
+.btn:hover
+{
+    background-color: #718f99;  
+
+
+}
+.bar-senac
+{
+    background-color: #CAEFFB;
+}
+.bar-heigh
+{
+    height: 5px;
+}
+.laranja
+{
+    color: #F7941D;
+}
+.degrade
+{
+    color: #F7941D 56%    ;
+}
+.email
+{
+    background-color: #7A6E6E;
+}
+.whatsapp
+{
+    background-color: #1DF740
+}

@@ -19,10 +19,7 @@
                 
                 <div class="row mt-3">
                     <div class="col-1">           
-                        <img class="brand" src="/image/logo_senac.png" alt="logo" style="width: 40px;">                        
-                    </div>
-                    <div class="col-9">
-                        <b class="fs-5">Emprega Viçosa</b>
+                        <img class="brand" src="/image/logo.jpg" alt="logo" style="width: 100px;">                        
                     </div>
                 </div>
 
@@ -46,7 +43,7 @@
 
                         <div class="row mt-5">
                             <div class="col-md-5 offset-1 d-grid">
-                                <button type="button" class="btn btn-primary text-white" @click="chennel()">
+                                <button type="button" class="btn btn:hover btn-text" @click="chennel()">
                                     Ligar
                                 </button>
                             </div>

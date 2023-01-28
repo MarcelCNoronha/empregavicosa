@@ -19,10 +19,7 @@
                 
                 <div class="row mt-3">
                     <div class="col-1">           
-                        <img class="brand" src="/image/logo_senac.png" alt="logo" style="width: 40px;">                        
-                    </div>
-                    <div class="col-9">
-                        <b class="fs-5">Emprega Viçosa</b>
+                        <img class="brand" src="/image/logo.jpg" alt="logo" style="width: 100px;">                        
                     </div>
                 </div>
 
@@ -69,7 +66,7 @@
                                     <div class="col-md-2 offset-10 mt-1">
                                         <button 
                                             type="button" 
-                                            class="btn btn-primary btn-sm text-white" 
+                                            class="btn btn:hover btn-text" 
                                             @click="store()"
                                         >
                                             Cadastrar

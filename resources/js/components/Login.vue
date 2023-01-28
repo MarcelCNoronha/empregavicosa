@@ -14,7 +14,7 @@
                 <div class="row mt-5 text-center">
                     <div class="col-12">
                         <img 
-                            src="image/logo_senac.png" 
+                            src="image/logo.jpg" 
                             alt="logo"
                         >
                     </div>
@@ -24,10 +24,10 @@
                     <div class="col-12">
                         <p class="fs-5">
                             <span class="fw-bold text-primary"> 
-                                Bem Vindo ao Emprega Viçosa 
+                                Bem Vindo ao Emprega Viçosa! 
                             </span> 
                             <br>
-                            Que bom te ver novamente, realize o login
+                            Informe suas credênciais para acessar a plataforma
                         </p>
                     </div>
                 </div>
@@ -211,7 +211,7 @@
                     <div class="col-8 offset-2 d-grid">
                         <button 
                             type="button" 
-                            class="btn btn-primary text-white"
+                            class="btn btn:hover btn-text"
                             @click="post()"
                         >
                             Continuar
