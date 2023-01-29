@@ -25,3 +25,6 @@ docker run --rm \
 ./vendor/bin/sail artisan migrate:fresh --seed
 
 ./vendor/bin/sail npm run dev
+
+
+Projeto em trabalho
